@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, View, Text, FlatList, Image, ActivityIndicator, Dimensions, SafeAreaView } from "react-native";
-import getListHistory from "../../apis/getListHistory";
+import getNettruyen from "../apis/getNettruyen";
 
 
 const renderItem = ({item}) => {
@@ -21,11 +21,11 @@ const renderFooter = () => {
     );
 };
 
-const ListHistory = () => {
+const ListManga = () => {
     const [data, setData] = useState([]);
     // const 
     useEffect(() => {
-        getListHistory()
+        getNettruyen()
         .then(res => {
             setData(res.data);
             console.log(res.data);
@@ -47,7 +47,7 @@ const ListHistory = () => {
     );
 };
 
-export default ListHistory;
+export default ListManga;
 const screenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     container: {

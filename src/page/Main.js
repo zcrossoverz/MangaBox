@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import ListHistory from "../components/List/History";
+import TestList from "../components/List/TestList";
 
 
 export default function Main(){
@@ -26,7 +27,7 @@ export default function Main(){
             <View style={styles.wrapperList}>
                 <Text style={styles.sectionTitle}>Lich Su</Text>
                 <View style={styles.item}>
-                    <ListHistory />
+                    <TestList />
                 </View>
             </View>
         </View>
