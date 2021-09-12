@@ -1,18 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import { View, Text } from 'react-native';
-// import HistoryPage from './src/page/HistoryPage';
-// import Main from './src/page/Main';
-
-// export default function App() {
-//   return (
-//     <View>
-//       {/* <StatusBar style="auto" /> */}
-//       <HistoryPage />
-//     </View>
-//   );
-// }
-
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -32,6 +17,7 @@ const App = () => {
           options={{ title: 'Main' }}
         />
         <Stack.Screen name="Profile" component={ListManga} />
+        <Stack.Screen name="History" component={ListHistory} />
       </Stack.Navigator>
     </NavigationContainer>
   );
