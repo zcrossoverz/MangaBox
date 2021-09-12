@@ -1,40 +1,69 @@
 import * as React from 'react';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, Text } from 'react-native';
-import ListHistory from './src/components/List/History';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import HistoryPage from './src/page/HistoryPage';
 import ListManga from './src/page/GetListManga';
 
-const Stack = createNativeStackNavigator();
 
-const App = () => {
+function Profile() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Profile!</Text>
+    </View>
+  );
+}
+
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="Mới cập nhật - nettruyen"
+        component={ListManga}
+        options={{
+          tabBarLabel: 'Mới',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="github" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Lịch sử đọc truyện"
+        component={HistoryPage}
+        options={{
+          tabBarLabel: 'Lịch sử',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="history" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: 'Thư viện',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Main' }}
-        />
-        <Stack.Screen name="Profile" component={ListManga} />
-        <Stack.Screen name="History" component={ListHistory} />
-      </Stack.Navigator>
+      <MyTabs />
     </NavigationContainer>
   );
-};
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Go to m"
-      onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
-      }
-    />
-  );
-};
-const ProfileScreen = ({ navigation, route }) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
-};
-
-export default App;
+}
