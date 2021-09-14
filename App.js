@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HistoryPage from './src/page/HistoryPage';
 import ListManga from './src/page/GetListManga';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 function Profile() {
@@ -32,6 +31,7 @@ function MyTabs() {
         component={ListManga}
         options={{
           tabBarLabel: 'Mới',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="github" color={color} size={size} />
           ),

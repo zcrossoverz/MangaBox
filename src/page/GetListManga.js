@@ -102,25 +102,29 @@ const styles = StyleSheet.create({
     
     container: {
         padding: 10,
-        marginTop: 0,
+        marginTop: 10,
         flex: 1,
         width: screenWidth,
         height: screenHeight,
-        backgroundColor: '#ebebeb'
+        backgroundColor: '#ebebeb',
+        alignItems: 'center'
     },
     itemRow: {
         margin: 2,
         justifyContent: 'center',
         alignContent: 'center',
-        minHeight: 300,
+        minHeight: 200,
         marginBottom: 16,
-        marginEnd: 12
+        marginEnd: 12,
+        flexWrap: 'nowrap',
+        overflow: 'hidden'
+        // borderBottomRightRadius: 32
     },
     item: {
         width: (screenWidth)/numColumn - 20,
         flex: 1,
         borderRadius: 12,
-        backgroundColor: '#F8F8F8',
+        backgroundColor: '#F8F8F8'
         
     },
     itemImageThumbnail: {
@@ -136,12 +140,15 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start'
     },
     itemText: {
-        
+        backgroundColor: '#e91e63',
         padding: 5,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        borderBottomEndRadius: 12,
+        borderBottomStartRadius: 12
     },
     itemTextTitle: {
+        color: '#fff',
         justifyContent:'flex-end',
         fontSize: 16,
         fontWeight: '300',
