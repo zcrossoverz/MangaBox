@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HistoryPage from './src/page/HistoryPage';
 import ListManga from './src/page/GetListManga';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 function Profile() {
@@ -59,11 +60,11 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
 export default function App() {
   return (
     <NavigationContainer>
       <MyTabs />
+      
     </NavigationContainer>
   );
 }

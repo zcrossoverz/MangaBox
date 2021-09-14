@@ -1,38 +1,18 @@
 import React, {useEffect, useState} from "react";
-import { StyleSheet, View, Text, FlatList, Image, Dimensions, SafeAreaView, TouchableHighlight } from "react-native";
-import getNettruyen from "../apis/getNettruyen";
+import { StyleSheet, View, Text, FlatList, Image, Dimensions, SafeAreaView, TouchableOpacity } from "react-native";
+import getNettruyen from "../apis/nettruyen/getNettruyen";
 import * as Animatable from 'react-native-animatable';
-import { NavigationContainer } from '@react-navigation/native';
+import DetailManga from "./GetDetailManga";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 const numColumn = 2;
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-const renderItem = ({item}) => {
-    return (
-        
-        <Animatable.View style={styles.itemRow} animation="fadeInUp">
-                <TouchableHighlight
-                onPress={()=> {
-                    
-                }}
-                >
-            <View style={styles.item}>
-                    <View style={styles.itemImage}>
-                        <Image source={{uri: item.image}} style={styles.itemImageThumbnail}></Image>
-                    </View>
-                    <View style={styles.itemText}>
-                        <Text style={styles.itemTextTitle}>{item.title.replace('Truyện tranh ','')}</Text>
-                    </View>
-                    {/* <Text style={styles.itemText}>{item.url}</Text> */}
-            </View>
-                </TouchableHighlight>
-        </Animatable.View>
-    );
-};
 
 
 
-const ListManga = () => {
+const ListManga = ({navigation}) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -58,24 +38,66 @@ const ListManga = () => {
     }, []);
 
 
-    
 
     return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-            
-            data={data}
-            numColumns={2}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            maxToRenderPerBatch={10}
-            initialNumToRender={6}
-            />
-        </SafeAreaView>
+        
+            <SafeAreaView style={styles.container}>
+                <FlatList
+                data={data}
+                numColumns={2}
+                renderItem={({item}) => {
+                    return (
+                    <TouchableOpacity
+                    onPress={()=> {
+                        navigation.push('Details', {
+                            url: item.url,
+                            title: item.title
+                        });
+                        // console.log('detail '+item.title);
+                    }}
+                    >
+                        <Animatable.View style={styles.itemRow} animation="fadeInUp">
+
+                            <View style={styles.item}>
+                                    <View style={styles.itemImage}>
+                                        <Image source={{uri: item.image}} style={styles.itemImageThumbnail}></Image>
+                                    </View>
+                                    <View style={styles.itemText}>
+                                        <Text style={styles.itemTextTitle}>{item.title.replace('Truyện tranh ','')}</Text>
+                                    </View>
+                            </View>
+                        </Animatable.View>
+                    </TouchableOpacity>
+                    );
+                }}
+                keyExtractor={(item, index) => index.toString()}
+                maxToRenderPerBatch={10}
+                initialNumToRender={6}
+                />
+            </SafeAreaView>
     );
 };
 
-export default ListManga;
+const Stack = createNativeStackNavigator();
+
+
+const GetListManga = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={ListManga} options={{
+                headerShown: false
+            }} />
+            <Stack.Screen name="Details" component={DetailManga} options={{
+                headerShown: true,
+                headerBlurEffect: true
+            }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+
+export default GetListManga;
 const styles = StyleSheet.create({
     
     container: {
