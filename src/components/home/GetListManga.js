@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, View, Text, FlatList, Image, Dimensions, SafeAreaView, TouchableOpacity } from "react-native";
-import getNettruyen from "../apis/nettruyen/getNettruyen";
+import getNettruyen from "../../apis/nettruyen/getNettruyen";
 import * as Animatable from 'react-native-animatable';
-import DetailManga from "./GetDetailManga";
+import DetailManga from "../../screen/GetDetailManga";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 

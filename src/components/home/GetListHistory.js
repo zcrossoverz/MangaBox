@@ -22,7 +22,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
   </TouchableOpacity>
 );
 
-const HistoryPage = () => {
+const GetListHistory = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   const renderItem = ({ item }) => {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HistoryPage;
+export default GetListHistory;
