@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Dimensions, StyleSheet, Text, Image, FlatList, TouchableOpacity, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ListChapter from "../components/detailmanga/GetListChapter";
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -43,7 +44,8 @@ const DetailManga = ({route, navigation}) => {
                 genres: genres,
                 status: status,
                 author: author,
-                summary: summary
+                summary: summary,
+                list_chapter: chapter_list
             })
         });
     }, []);
@@ -78,6 +80,7 @@ const DetailManga = ({route, navigation}) => {
                 <Text style={styles.text}><MaterialCommunityIcons name="rss" size={25} /> Tình trạng: { data.status }</Text>
                 <Text style={styles.text}><MaterialCommunityIcons name="calendar-text" size={25} /> Giới thiệu:</Text>
                 <Text style={styles.text}>{ data.summary }</Text>
+                <ListChapter list_chapter={data.list_chapter} />
                 </View>
             </ScrollView>
         </SafeAreaView>
