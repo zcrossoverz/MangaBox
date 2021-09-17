@@ -87,10 +87,11 @@ const GetListManga = () => {
             <Stack.Screen name="Home" component={ListManga} options={{
                 headerShown: false
             }} />
-            <Stack.Screen name="Details" component={DetailManga} options={{
+            <Stack.Screen name="Details" component={DetailManga} options={({route}) => ({
                 headerShown: true,
-                headerBlurEffect: true
-            }}
+                headerBlurEffect: true,
+                title: route.params.title.replace('Truyện tranh ','')
+            })}
             />
         </Stack.Navigator>
     );

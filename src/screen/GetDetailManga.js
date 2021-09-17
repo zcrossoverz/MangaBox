@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Dimensions, StyleSheet, Text, Image } from "react-native";
+import { SafeAreaView, View, Dimensions, StyleSheet, Text, Image, FlatList, TouchableOpacity, ScrollView } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -49,15 +51,35 @@ const DetailManga = ({route, navigation}) => {
     
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.detail_image}>
-                <Image style={styles.image_thumbnail}
-                source={{ uri: data.image }}
+            <ScrollView>
+                <View style={styles.detail_image}>
+                    <Image style={styles.image_thumbnail}
+                    source={{ uri: data.image }}
+                    />
+                </View>
+                <View style={styles.detail_info}>
+
+                <Text style={styles.title}>{ data.title }</Text>
+                <FlatList 
+                data={data.genres}
+                numColumns={3}
+                renderItem={({item}) => {
+                    return (
+                        <TouchableOpacity style={styles.genres}>
+                            <Text style={styles.genres_text}>
+                                {item}
+                            </Text>
+                        </TouchableOpacity>
+                    );
+                }}
+                keyExtractor={(item) => item.toString()}
                 />
-            </View>
-            <View style={styles.detail_info}>
-               <Text style={styles.title}>{ data.title }</Text>
-               <Text style={styles.genres}></Text>
-            </View>
+                <Text style={styles.text}><MaterialCommunityIcons name="pencil" size={25} /> Tác giả: { data.author }</Text>
+                <Text style={styles.text}><MaterialCommunityIcons name="rss" size={25} /> Tình trạng: { data.status }</Text>
+                <Text style={styles.text}><MaterialCommunityIcons name="calendar-text" size={25} /> Giới thiệu:</Text>
+                <Text style={styles.text}>{ data.summary }</Text>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -91,7 +113,6 @@ const styles = StyleSheet.create({
     },
     detail_info: {
         minHeight: 250,
-        backgroundColor: 'red',
         padding: 8,
         margin: 8,
         marginTop: 0,
@@ -101,5 +122,27 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '600',
         fontSize: 20
+    },
+    genres: {
+        borderWidth: 1,
+        padding: 4,
+        borderColor:'#f18121',
+        height: 40,
+        alignItems:'center',
+        backgroundColor:'#fff',
+        justifyContent:'center',
+        margin: 4,
+        borderRadius: 8
+    },
+    genres_text: {
+        color:'#f18121'
+    },
+    size_vector: {
+        width: 10,
+        height: 10
+    },
+    text: {
+        padding: 4,
+        fontSize: 16
     }
 });
